@@ -8,7 +8,7 @@ const questionSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: false
     },
 
     title: { type: String, required: true },
@@ -33,6 +33,7 @@ questionSchema.set('toJSON', { getters: true })
 
 questionSchema.options.toJSON.transform = (doc, ret) => {
     const obj = {...ret};
+    delete obj.__v;
     return obj;
 
 }

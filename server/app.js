@@ -28,7 +28,7 @@ server.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
 })*/
 
-app.use('/', require('./routes/index.route') )
+app.use('/questions', require('./routes/questions') )
 
 
 module.exports = app;

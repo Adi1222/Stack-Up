@@ -28,4 +28,7 @@ server.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`)
 })*/
 
+app.use('/', require('./routes/index.route') )
+
+
 module.exports = app;

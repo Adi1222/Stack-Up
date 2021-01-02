@@ -25,7 +25,7 @@ const {
   *   Add an answer to a question 
   *   Private
   */  
-  router.post('/:qid', addAnswer)
+  router.post('/', addAnswer)
 
 
 

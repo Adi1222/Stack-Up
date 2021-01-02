@@ -16,11 +16,11 @@ const questionSchema = new Schema({
     tags: [{ type: String, required: true }],
     score: { type: Number, default: 0 },
     comments: [commentSchema],
-    //answers: [answerSchema],
-    answers: [{ 
+    answers: [answerSchema],
+    /*answers: [{ 
         type: Schema.Types.ObjectId,
         ref: 'Answer'
-      }],
+      }],*/
     created_at: { type: Date, default: Date.now },
     views: { type: Number, default: 0 }
 })
@@ -75,10 +75,10 @@ questionSchema.methods = {
     },
 
 
-    addAnswer: function(author, body) {
-        this.answers.push({ author, body });
+    /*addAnswer: function(body) {
+        this.answers.push({ body });
         return this.save();
-    },
+    },*/
 
 
     deleteAnswer: function(id) {
@@ -100,8 +100,6 @@ questionSchema.methods = {
     }
 
 };
-
-
 
 
 

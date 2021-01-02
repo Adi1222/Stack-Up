@@ -16,7 +16,11 @@ const questionSchema = new Schema({
     tags: [{ type: String, required: true }],
     score: { type: Number, default: 0 },
     comments: [commentSchema],
-    answers: [answerSchema],
+    //answers: [answerSchema],
+    answers: [{ 
+        type: Schema.Types.ObjectId,
+        ref: 'Answer'
+      }],
     created_at: { type: Date, default: Date.now },
     views: { type: Number, default: 0 }
 })
@@ -72,7 +76,7 @@ questionSchema.methods = {
 
 
     addAnswer: function(author, body) {
-        this.answer.push({ author, body });
+        this.answers.push({ author, body });
         return this.save();
     },
 
@@ -96,23 +100,6 @@ questionSchema.methods = {
     }
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

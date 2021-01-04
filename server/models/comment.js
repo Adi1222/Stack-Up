@@ -6,11 +6,11 @@ const commentSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'user',
-        required: true
+        required: false
     },
 
     body: { type: String, required: true },
-    created_at: { type: Date, default: Date.now }
+    created: { type: Date, default: Date.now }
 
 })
 

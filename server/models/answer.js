@@ -39,7 +39,7 @@ answerSchema.methods = {
     },
 
     deleteComment: function(id) {
-        this.model('Answer').comments.findOne({ _id: id}).exec(function(err, commment) {
+        this.model('Answer').comments.findOne({ _id: id}).exec(function(err, comment) {
             if(err) {
                 throw new Error('Comment not found');
             }

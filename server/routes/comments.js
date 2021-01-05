@@ -38,6 +38,4 @@ const {
   */
   router.delete('/:question/:answer/:comment', deleteComment);
 
-
-
 module.exports = router;

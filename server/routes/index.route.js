@@ -7,10 +7,15 @@ const comments = require('./comments')
 const express = require('express')
 const router = express.Router();
 
+const {
+    signup,
+    login
+} = require('../controllers/users')
 
 
 
-
+router.use('/signup', sigup)
+router.use('/login', login)
 router.use('/questions', questions)
 router.use('/answers', answers)
 router.use('/users/', users)

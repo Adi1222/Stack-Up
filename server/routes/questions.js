@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const { check } = require('express-validator')
+const authen = require('../middlewares/authenticateToken')
+const questionAuthentication = require('../middlewares/questionAuthentication')
 
 
 const {
@@ -10,7 +11,8 @@ const {
     deleteQuestion,
     listByTags,
     listByUser,
-    loadComments
+    loadComments,
+    validateQuestion
 } = require('../controllers/questions')
 
 
@@ -56,7 +58,12 @@ const {
  *     create a question
  *    
  */
-router.post('/', addQuestion)
+router.post('/',
+    [ 
+        authen,
+        validateQuestion
+
+    ], addQuestion)
 
 
  /**
@@ -64,7 +71,12 @@ router.post('/', addQuestion)
   *    Delete a question by id 
   * 
   */
- router.delete('/:id', deleteQuestion)
+ router.delete('/:id',
+    [
+        authen,
+        questionAuthentication
+
+    ], deleteQuestion)
 
 
  module.exports = router;

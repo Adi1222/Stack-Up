@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
-
+const authen = require('../middlewares/authenticateToken')
+const commentAuthentication = require('../middlewares/commentAuthentication')
 
 const {
 
@@ -16,7 +17,10 @@ const {
  *  add a comment to a question or to an answer
  * 
  */
- router.post('/:question/:answer?', addComment)
+ router.post('/:question/:answer?', [
+      authen,
+      commentAuthentication
+  ], addComment)
 
 
 
@@ -28,7 +32,10 @@ const {
  *    delete a comment of a particular question
  *   Private access 
  */   
- router.delete('/:question/:comment', deleteComment);
+ router.delete('/:question/:comment', [
+      authen,
+      commentAuthentication
+  ], deleteComment);
 
 
   
@@ -36,6 +43,9 @@ const {
   *   DELETE /comments/:question/:answer/:comment
   *   Deleting a comment of a particular  answer of a particluar question 
   */
-  router.delete('/:question/:answer/:comment', deleteComment);
+  router.delete('/:question/:answer/:comment', [
+      authen,
+      commentAuthentication
+  ], deleteComment);
 
 module.exports = router;

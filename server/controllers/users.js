@@ -6,13 +6,20 @@ const { body, validationResult } = require('express-validator');
 
 const signup = async (req, res) => {
 
+    const result = validationResult(req);
+
+    if (!result.isEmpty())
+    {
+        return res.status(422).json({ errors:  result.array()});
+    }
+
     try {
 
         const username = req.body.username;
 
         const pass = req.body.password;
 
-        const userObect = {
+        const userObject = {
             username: username.toLowerCase(),
             password: pass
         };
@@ -25,7 +32,7 @@ const signup = async (req, res) => {
         }
 
 
-        const u = new User(userObect);
+        const u = new User(userObject);
         const savedUser = await u.save();
 
         if (savedUser)
@@ -64,6 +71,14 @@ const signup = async (req, res) => {
 } 
 
 const login = async (req, res) => {
+
+    const result = validationResult(req);
+
+    if (!result.isEmpty())
+    {
+        return res.status(422).json({ errors:  result.array()});
+    }
+
 
     try {
         

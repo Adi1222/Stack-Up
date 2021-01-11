@@ -1,4 +1,5 @@
 const { json } = require('body-parser');
+const { body } = require('express-validator');
 const Question = require('../models/question')
 //const Answer = require('../models/answer').Answer
 const User = require('../models/user')
@@ -21,6 +22,13 @@ const getAnswers = async (req, res) => {
 }
 
 const addAnswer =   (req, res) => {
+
+    const result = validationResult(req);
+
+    if (!result.isEmpty())
+    {
+        return res.status(422).json({ errors:  result.array()});
+    }
 
 
     return res.json({message: "HI ADI"})
@@ -94,10 +102,25 @@ const deleteAnswer = async (req, res) => {
 
 }
 
+const validateAnswer = [
+    body('text')
+    .exists()
+    .trim()
+    .withMessage('is required')
 
+    .notEmpty()
+    .withMessage('cannot be blank')
+
+    .isLength({ min: 10 })
+    .withMessage('must be at least 10 characters long')
+
+    .isLength({ max: 10000 })
+    .withMessage('must be at most 10000 characters long')
+]
 
 module.exports = {
     getAnswers,
     addAnswer,
-    deleteAnswer
+    deleteAnswer,
+    validateAnswer
 }

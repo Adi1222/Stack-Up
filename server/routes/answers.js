@@ -1,11 +1,13 @@
 const express = require('express')
 const router = express.Router();
-const { check } = require('express-validator')
+const authen = require('../middlewares/authenticateToken')
+const answerAuthentication = require('../middlewares/answerAuthentication')
 
 const {
     getAnswers,
     addAnswer,
-    deleteAnswer
+    deleteAnswer,
+    validateAnswer
 } = require('../controllers/answers')
 
 
@@ -25,7 +27,10 @@ const {
   *   Add an answer to a question 
   *   Private
   */  
-  router.post('/', addAnswer)
+  router.post('/', [
+    authen,
+    validateAnswer
+  ] ,addAnswer)
 
 
 
@@ -34,7 +39,10 @@ const {
  *   delete an answer of a particular question
  *   private access
  */
-  router.delete('/:qid/:aid', deleteAnswer)
+  router.delete('/:qid/:aid', [
+    authen, 
+    answerAuthentication
+  ], deleteAnswer)
 
 
 

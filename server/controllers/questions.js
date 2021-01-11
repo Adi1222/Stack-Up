@@ -29,6 +29,16 @@ const getSingleQuestion = (req, res) => {
 
 const addQuestion = async (req, res) => {
 
+
+    const result = validationResult(req);
+
+    if (!result.isEmpty())
+    {
+        return res.status(422).json({ errors:  result.array()});
+    }
+
+
+
     try {
         const { title, body, tagname } = req.body;
         // const author = res.user.id;

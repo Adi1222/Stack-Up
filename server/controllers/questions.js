@@ -1,4 +1,5 @@
 const { json } = require('body-parser');
+const { body, validationResult } = require('express-validator');
 const Question = require('../models/question')
 const User = require('../models/user')
 
@@ -107,6 +108,40 @@ const loadComments = (req, res) => {
 
 }
 
+
+const validateQuestion = [
+    body('title')
+        .exists()
+        .trim()
+        .withMessage('is required')
+
+        .notEmpty()
+        .withMessage('cannot be blank')
+
+        .isLength({ min: 5 })
+        .withMessage('must be at least 5 characters long')
+
+        .isLength({ max: 200 })
+        .withMessage('must be at most 200 characters long'),
+
+    body('body')
+        .exists()
+        .trim()
+        .withMessage('is required')
+
+        .isLength({ min: 10 })
+        .withMessage('must be at least 10 characters long')
+
+        .isLength({ max: 5000 })
+        .withMessage('must be at most 5000 characters long'),
+    
+    body('tags')
+        .exists()
+        .withMessage('required')
+
+];
+
+
 module.exports = {
     getQuestions,
     getSingleQuestion,
@@ -114,5 +149,6 @@ module.exports = {
     deleteQuestion,
     listByTags,
     listByUser,
-    loadComments
+    loadComments, 
+    validateQuestion
 }

@@ -9,13 +9,14 @@ const router = express.Router();
 
 const {
     signup,
-    login
+    login,
+    validateUser
 } = require('../controllers/users')
 
 
 
-router.use('/signup', sigup)
-router.use('/login', login)
+router.post('/signup', validateUser, signup);
+router.post('/login', validateUser ,login);
 router.use('/questions', questions)
 router.use('/answers', answers)
 router.use('/users/', users)

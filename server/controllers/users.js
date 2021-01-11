@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const { body, validationResult } = require('express-validator');
 
 
 const signup = async (req, res) => {
@@ -140,9 +141,37 @@ const getSingleUser = async (req, res) => {
 }
 
 
+const validateUser = [
+    body('username')
+        .exists()
+        .trim()
+        .withMessage('is required')
+
+        .notEmpty()
+        .withMessage('cannot be blank')
+
+        .isLength({ max: 15 })
+        .withMessage('must be atmost 15 characters long'),
+    
+    body('password')
+        .exists()
+        .trim()
+        .withMessage('is required')
+
+        .notEmpty()
+        .withMessage('cannot be blank')
+
+        .isLength({ min: 5 })
+        .withMessage('must be atleast 5 characters long')
+
+        .isLength({ max: 15 })
+        .withMessage('must be atmost 15 characters long')
+];
+
 module.exports = {
     getUsers,
     getSingleUser,
     signup,
-    login
+    login,
+    validateUser
 }

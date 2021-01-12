@@ -1,13 +1,16 @@
+import { Provider } from 'react-redux';
 import './App.css';
+import store from './redux/store';
+import Routes from './routes';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hi</h1>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div className='App'>
+        <Routes/>
+      </div>
+    </Provider>
   );
-}
+};
 
 export default App;

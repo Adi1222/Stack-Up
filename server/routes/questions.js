@@ -73,8 +73,7 @@ router.post('/',
   */
  router.delete('/:id',
     [
-        authen,
-        questionAuthentication
+        authen
 
     ], deleteQuestion)
 

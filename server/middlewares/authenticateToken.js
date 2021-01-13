@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
     if (!token) 
     {
         return res.status(401)
-                  .json({ message: 'Authenktication invalid.' })
+                  .json({ message: 'Authentication invalid.' })
     }
 
 

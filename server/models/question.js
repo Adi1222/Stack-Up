@@ -75,10 +75,10 @@ questionSchema.methods = {
     },
 
 
-    /*addAnswer: function(body) {
+    addAns: function(body) {
         this.answers.push({ body });
         return this.save();
-    },*/
+    },
 
 
     deleteAnswer: function(id) {

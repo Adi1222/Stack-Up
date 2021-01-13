@@ -41,10 +41,10 @@ const addQuestion = async (req, res) => {
 
     try {
         const { title, body, tagname } = req.body;
-        // const author = res.user.id;
+        const author = req.user.id;
 
         const question = await Question.create({
-            title, body, tagname
+            title, body, tagname, author
         });
 
         res.status(201).json(question)
@@ -59,25 +59,17 @@ const addQuestion = async (req, res) => {
 
 }
 
-const deleteQuestion =  (req, res) => {
+const deleteQuestion =  async (req, res) => {
 
     try {
 
-        Question.deleteOne({ _id: req.params.id}, function(err, questions) {
-            if(err) {
-                console.log(err);
-                return res.status(err.code).json(err);
-            }
-
-            return res.status(204)
-                      .json({ 'message': 'Question deleted successfully' })
-
-        })
+        await Question.deleteOne({ _id: req.params.id});
+        return res.json({ message: "Question deleted!" })
 
     } catch(error) {
         console.error(error);
         return res.status(500)
-                  .json({'text':'Cannot Delete!!!'})
+                  .json({ message :'Cannot Delete!!!'})
 
     }
 
@@ -145,9 +137,6 @@ const validateQuestion = [
         .isLength({ max: 5000 })
         .withMessage('must be at most 5000 characters long'),
     
-    body('tags')
-        .exists()
-        .withMessage('required')
 
 ];
 

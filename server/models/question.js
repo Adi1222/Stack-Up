@@ -8,7 +8,7 @@ const questionSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false
+        required: true
     },
 
     title: { type: String, required: true },

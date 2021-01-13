@@ -7,7 +7,7 @@ const answerSchema = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: false,
+        required: true,
     },
 
     created_at: { type: Date, default: Date.now },

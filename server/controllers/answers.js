@@ -1,7 +1,7 @@
 const { json } = require('body-parser');
-const { body } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 const Question = require('../models/question')
-//const Answer = require('../models/answer').Answer
+const Answer = require('../models/answer').Answer
 const User = require('../models/user')
 
 
@@ -21,7 +21,7 @@ const getAnswers = async (req, res) => {
 
 }
 
-const addAnswer =   (req, res) => {
+const addAnswer = async  (req, res) => {
 
     const result = validationResult(req);
 
@@ -31,44 +31,38 @@ const addAnswer =   (req, res) => {
     }
 
 
-    return res.json({message: "HI ADI"})
-
-    /*try {
-
-
+    try {
         
 
-        //const user_id = req.user.id;
-        /*const { text } = req.body;
+        const { text } = req.body;
+        const author = req.user.id;
 
     
-
         const ans = await Answer.create({
-            text
+            text, author
         });
 
-        res.status(201).json(ans)*/
+        res.status(201).json(ans)
 
-        /*const question = await Question.find({ _id: req.params.qid})
+        const question = await Question.find({ _id: req.params.qid})
 
-        res.json(question)
 
-        if (! question) {
+       /* if (! question) {
             return res.json(404)
                        
         }
 
-        const quest = await question.addAnswer(text);
+        const quest = await question.addAns(text);
 
         res.status(201).json(quest);*/
 
        
 
-    /*} catch(error) {
+    } catch(error) {
         console.error(error)
         return res.status(400)
                   .json({ message: 'Invalid Question id.' })
-    }*/
+    }
 
 }
 

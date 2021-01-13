@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const { body, validationResult } = require('express-validator');
+const { hashPassword } = require('../utils/authentication')
 
 
 const signup = async (req, res) => {
@@ -19,12 +20,14 @@ const signup = async (req, res) => {
 
         const pass = req.body.password;
 
+
+
         const userObject = {
             username: username.toLowerCase(),
             password: pass
         };
 
-        const existingUser = await User.findOne({ username: u.username });
+        const existingUser = await User.findOne({ username: userObject.username });
 
         if (existingUser) 
         {
@@ -37,7 +40,7 @@ const signup = async (req, res) => {
 
         if (savedUser)
         {
-            const token = jwt.sign(savedUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5d' })
+            const token = jwt.sign({ id: savedUser._id, username: savedUser.username }, process.env.ACCESS_TOKEN_SECRET);
 
             const { username, id, created, profilepic } = savedUser;
 
@@ -46,6 +49,7 @@ const signup = async (req, res) => {
                 id, 
                 created, 
                 profilepic
+                
             }
 
 
@@ -92,19 +96,21 @@ const login = async (req, res) => {
             return res.status(403).json({ message: 'Invalid username or password' }) 
         }
 
-        const match = await bcrypt.compare(password, user.password);
+        const match = user.password === password;
+      
 
         if (match) 
         {
-            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5d' })
+            const token = jwt.sign({ id: user._id, username: user.username }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '5d' })
             
-            const { username, id, created, profilepic } = savedUser;
+            const { username, id, created, profilepic } = user;
 
             const userInfo = {
                 username,
                 id, 
                 created, 
-                profilepic
+                profilepic,
+                
             }
 
 

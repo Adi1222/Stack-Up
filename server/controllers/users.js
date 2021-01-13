@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const { body, validationResult } = require('express-validator');
-const { hashPassword } = require('../utils/authentication')
 
 
 const signup = async (req, res) => {

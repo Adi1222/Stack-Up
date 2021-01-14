@@ -2,6 +2,14 @@ import * as authTypes from './auth.types'
 import axios from 'axios';
 
 
+
+
+
+
+
+
+
+
 /***********    SIGN-UP     ****************/
 
 export const register = ({ username, password }) => async dispatch => {
@@ -23,7 +31,7 @@ export const register = ({ username, password }) => async dispatch => {
 
         dispatch({
             type: authTypes.REGISTER_SUCCESS,
-            payload: res.data.data
+            payload: res.data
         });
 
 
@@ -59,9 +67,10 @@ export const login = ({ username, password }) => async dispatch => {
             password: password,
         }, config);
 
+
         dispatch({
             type: authTypes.LOGIN_SUCCESS,
-            password: res.data.data
+            payload: res.data // we'll get token and that token we can set in localstorage in the reducer part (or here also)
         });
 
         
@@ -83,28 +92,10 @@ export const login = ({ username, password }) => async dispatch => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*******************         LOGOUT           **************************/
 
 
 export const logout = () => dispatch => {
-    localStorage.removeItem("token");
 
     dispatch({ type: authTypes.LOGOUT });
 

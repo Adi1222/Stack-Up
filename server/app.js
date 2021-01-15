@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // Enabling cors
 app.options('*', cors())
-app.use(cors({ origin: 'http://localhost:5000' })) // giving access to a specific origin
+app.use(cors({ origin: 'http://localhost:3000' })) // giving access to a specific origin
 
 
 const server = http.createServer(app);

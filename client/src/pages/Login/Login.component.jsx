@@ -19,8 +19,9 @@ import {
 
 
 
-const Login = ({ isAuthenticated }) => {
+const Login = ({ isAuthenticated, login }) => {
 
+  console.log('hi')
 
     const [values, setValues] = useState({
         username: '',
@@ -32,8 +33,9 @@ const Login = ({ isAuthenticated }) => {
 
     const [passwordError, setPasswordError] = useState(false);
 
+    const auth = isAuthenticated;
+
     useEffect(() => {
-        
         return () => {
             <Redirect to="/" />
         }
@@ -56,7 +58,7 @@ const Login = ({ isAuthenticated }) => {
     const handleSubmit = async e => {
         e.preventDefault();
 
-        login({ username, password });
+        login({username, password});
 
     }
 
@@ -125,13 +127,13 @@ Login.propTypes = {
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.isAuthenticated,
-    }
-}
+    };
+};
 
-/*const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
+      login: (username, password) => dispatch(login(username, password)),
+    };
+};
 
-    }
-}*/
-
-export default connect(mapStateToProps, null)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

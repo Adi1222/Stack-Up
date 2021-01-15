@@ -68,6 +68,8 @@ export const login = ({ username, password }) => async dispatch => {
         }, config);
 
 
+        console.log('successfull')
+
         dispatch({
             type: authTypes.LOGIN_SUCCESS,
             payload: res.data // we'll get token and that token we can set in localstorage in the reducer part (or here also)

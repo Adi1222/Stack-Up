@@ -20,7 +20,7 @@ const authReducer = (state = initialState, action) => {
             localStorage.setItem('userInfo', JSON.stringify(userInfo))
             return {
                 ...state,
-                ...action.payload,
+                /*...action.payload,*/
                 isAuthenticated: true,
                 loading: false
             };

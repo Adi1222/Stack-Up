@@ -55,7 +55,7 @@ export const login = ({ username, password }) => async dispatch => {
     
     const config = {
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }
     };
 

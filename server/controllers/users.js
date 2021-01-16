@@ -52,7 +52,7 @@ const signup = async (req, res) => {
             }
 
 
-            return res.json({ message: 'User Created', token, userInfo })
+            return res.json({ message: 'User Created', token, id, userInfo })
 
         }
         else
@@ -113,7 +113,7 @@ const login = async (req, res) => {
             }
 
 
-            return res.json({ message: 'Authentication Successfull', token, userInfo })
+            return res.json({ message: 'Authentication Successfull', token, id,  userInfo })
         }
         else 
         {

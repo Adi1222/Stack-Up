@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types'
 import { logout } from '../../redux/actions/auth/auth';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { RiStackLine } from 'react-icons/ri'
 import LinkButton from '../LinkButton/LinkButton.component';
@@ -11,6 +11,8 @@ import './Header.css'
 
 
 const Header = ({ isAuthenticated, loading, user, err, logout }) => {
+
+    let history = useHistory();
 
 
     const logoutLink = (

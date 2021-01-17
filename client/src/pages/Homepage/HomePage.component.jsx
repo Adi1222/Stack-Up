@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
-import Header from '../../components/Header/Header.component'
+//import Header from '../../components/Header/Header.component'
 
 const HomePage = () => {
-
     return(
         <Fragment>
-            <Header />
+            <h1>Hi</h1>
         </Fragment>
     )
 

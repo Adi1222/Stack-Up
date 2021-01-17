@@ -14,9 +14,16 @@ const Header = ({ isAuthenticated, loading, user, err, logout }) => {
 
 
     const logoutLink = (
-        <div>
-            { loading  ? <CircularProgress /> :  <Link className='wel' to={`/users/1`}>Welcome Adi</Link>}
-            <LinkButton className='logbtn' text={'Log Out'} link={'/logout'} handleClick={logout} />
+        <div className='btns'>
+            { loading  ? <CircularProgress /> :  <Link to={`/users/${user.id}`} title={user.username}>
+                <img alt='user-logo' className='userlogo'
+                     src={`https://secure.gravatar.com/avatar/${user.id}?s=164&d=identicon`}/>
+            </Link>}
+            <LinkButton 
+                text={'Log Out'} 
+                link={'/logout'} 
+                handleClick={logout}
+                type={'s-btn__filled'} />
         </div>
     )
 
@@ -29,14 +36,18 @@ const Header = ({ isAuthenticated, loading, user, err, logout }) => {
     )
 
 
-    return loading ? '' : <Fragment>
-        <nav className='navbar fixed-top'>
-            <Link className='navbar-logo' to='/'>
-                <RiStackLine />Stack Up
+    return loading ? '' : <header className='header'>
+        <div className='container'>
+            <Link className='logo' to='/'>
+                    <RiStackLine />
+                    <p>
+                        Stack Up
+                    </p>
             </Link>
+            <div style={{ flex: 1 }}></div>
             {!loading && <Fragment>{isAuthenticated ? logoutLink : loginLink}</Fragment>}
-        </nav>
-    </Fragment>
+        </div>
+    </header>
 
 
 };
@@ -70,3 +81,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Header);
 
 
 
+/**
+ * <Fragment>
+        <nav className='navbar fixed-top'>
+            <Link className='navbar-logo' to='/'>
+                <RiStackLine />Stack Up
+            </Link>
+            {!loading && <Fragment>{isAuthenticated ? logoutLink : loginLink}</Fragment>}
+        </nav>
+    </Fragment>
+ */

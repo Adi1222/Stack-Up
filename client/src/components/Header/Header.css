@@ -1,4 +1,4 @@
-.navbar {
+.header {
   position: fixed;
   min-width: auto;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.05),
@@ -7,25 +7,58 @@
   left: 0;
   width: 100%;
   z-index: 3;
+  background-color: #66c7ee;
   transition: box-shadow cubic-bezier(0.165, 0.84, 0.44, 1) 0.25s;
   height: 50px;
   box-sizing: border-box;
   border-top: 3px solid var(--orange);
 }
 
+.container {
+  max-width: 1264px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .logo {
-  margin-left: 90px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin-right: 0;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  height: 100%;
+  padding: 0 8px;
+  font-size: 22px;
+  color: var(--black-800);
+  font-family: sans-serif;
 }
 
 .btns {
+  margin-right: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userlogo {
+  width: 32px;
+  border-radius: 3px;
+  margin-right: 9px;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+}
+
+.logbtn {
   padding: 5px 10px;
   background-color: #e1ecf4;
   color: #39739d;
   border-color: #7aa7c7;
-  float: right;
 }
 
 .btn-outline-primary {
@@ -38,11 +71,4 @@
   color: #2c5777;
   background-color: #b3d3ea;
   border-color: #7aa7c7;
-}
-
-.wel {
-  display: grid;
-  grid-template-columns: 1fr 43px;
-  grid-gap: 5px;
-  margin-right: 5px;
 }

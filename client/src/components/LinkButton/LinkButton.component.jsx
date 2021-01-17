@@ -8,7 +8,8 @@ const LinkButton = ({text, link, handleClick, type, marginTop}) => {
     return(
         <Fragment>
             <Link onClick={handleClick} to={link}>
-            <button  className='btns'>
+            <button
+                className={`logbtn`}>
                 {text}
             </button>
             </Link>

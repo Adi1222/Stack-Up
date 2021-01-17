@@ -18,21 +18,25 @@ const authReducer = (state = initialState, action) => {
             //const { token, userInfo } = data;
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('userInfo', JSON.stringify(action.payload.userInfo))
+            const u = action.payload.userInfo;
             return {
                 ...state,
                 ...action.payload,
                 isAuthenticated: true,
-                loading: false
+                loading: false,
+                user: u
             };
 
         case authTypes.REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('userInfo', JSON.stringify(action.payload.userInfo))
+            const us = action.payload.userInfo;
             return{
                 ...state,
                 ...action.payload,
                 isAuthenticated: true,
-                loading: false
+                loading: false,
+                user: us
             }
             
 

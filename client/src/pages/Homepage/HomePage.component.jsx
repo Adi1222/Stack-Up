@@ -1,6 +1,10 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { addQuestion, deleteQuestion, getQuestion, getQuestions } from '../../redux/actions/questions/questions';
+import LinkButton from '../../components/LinkButton/LinkButton.component';
+import QuestionItem from '../../components/QuestionItem/QuestionItem.component';
 //import Header from '../../components/Header/Header.component'
 
 const HomePage = ({questions, question, loading, error, getQuestion, getQuestions, addQuestion, deleteQuestion}) => {
@@ -33,11 +37,45 @@ const HomePage = ({questions, question, loading, error, getQuestion, getQuestion
     }
     
     return(
-        <Fragment>
-            <h1>Hi</h1>
-        </Fragment>
+        loading || questions === null ? <CircularProgress /> : 
+            <div>
+                <div>
+                    <h1>All Questions</h1>
+                    <div>
+                        <LinkButton
+                            text={'Ask Question'}
+                            link={'/add/questions'}
+                            type={'s-btn__primary'}
+                        />
+                    </div>
+                </div>
+
+                <div>
+                    <span>{new Intl.NumberFormat('en-IN').format(questions.length)} Questions</span>
+                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                        <Button>Votes</Button>
+                        <Button>Views</Button>
+                        <Button>Newest</Button>
+                        <Button>Oldest</Button>
+                    </ButtonGroup>
+                </div>
+
+                <div>
+                    {
+                        questions.map(post => (
+                            <QuestionItem key={post.id} question={post} />
+                        ))
+                    }
+                </div>
+
+            </div>
     )
 
+}
+
+HomePage.propTypes = {
+    loading: PropTypes.bool,
+    getQuestions: PropTypes.func.isRequired,
 }
 
 

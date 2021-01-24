@@ -1,27 +1,38 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { addQuestion, deleteQuestion, getQuestion, getQuestions } from '../../redux/actions/questions/questions';
 import LinkButton from '../../components/LinkButton/LinkButton.component';
-import QuestionItem from '../../components/QuestionItem/QuestionItem.component';
-//import Header from '../../components/Header/Header.component'
+import QuestionWrapper from '../../components/Question/question-wrapper';
+import QuestionStats from '../../components/Question/question-stats'
+import QuestionInfo from '../../components/Question/question-info'
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import axios from 'axios'
 
-const HomePage = ({questions, question, loading, error, getQuestion, getQuestions, addQuestion, deleteQuestion}) => {
+const HomePage = () => {
     
+
     
-    //const [questions, setquestions] = useState(null)
+    const [questions, setquestions] = useState(null)
     const [sortType, setSortType] = useState('Newest')
-
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
-        getQuestions();
+        const getQuestions = async () => {
+            const res =  await axios.get('http://localhost:5000/api/questions');
+            const data = res.data;
+            setquestions(data);
+            setLoading(false);
+        }
 
-    }, [getQuestions]);
+    });
 
 
-    const handleSorting = () => {
+
+    /*const handleSorting = () => {
         switch(sortType) {
             case 'Votes':
                 return logic;
@@ -34,10 +45,10 @@ const HomePage = ({questions, question, loading, error, getQuestion, getQuestion
             default:
                 break
         }
-    }
+    }*/
     
     return(
-        loading || questions === null ? <CircularProgress /> : 
+         
             <div>
                 <div>
                     <h1>All Questions</h1>
@@ -63,7 +74,20 @@ const HomePage = ({questions, question, loading, error, getQuestion, getQuestion
                 <div>
                     {
                         questions.map(post => (
-                            <QuestionItem key={post.id} question={post} />
+                            <QuestionWrapper key={post.id}>
+                                <QuestionStats 
+                                    question={post}
+                                />
+                                <QuestionInfo 
+                                    id={post.id}
+                                    title={post.title}
+                                    author={post.author}
+                                    tags={post.tags}
+                                    created_at={post.created_at}
+                                    >
+                                        {post.body}
+                                    </QuestionInfo>
+                            </QuestionWrapper>
                         ))
                     }
                 </div>
@@ -73,6 +97,7 @@ const HomePage = ({questions, question, loading, error, getQuestion, getQuestion
 
 }
 
+/*
 HomePage.propTypes = {
     loading: PropTypes.bool,
     getQuestions: PropTypes.func.isRequired,
@@ -99,3 +124,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
+*/
+
+export default HomePage;

@@ -3,7 +3,7 @@ import * as questionTypes from '../../actions/questions/questions.types';
 const initialState = {
     questions: [],
     question: null,
-    loading: true,
+    loading: false,
     error: null
 };
 
@@ -28,8 +28,9 @@ const questionReducer = (state = initialState, action) => {
         case questionTypes.GET_QUESTIONS:
             return {
                 ...state,
-                ...action.payload,
-                loading: false
+                questions: [action.payload],
+                loading: false,
+                error: null
             };
         
         case questionTypes.GET_QUESTION:

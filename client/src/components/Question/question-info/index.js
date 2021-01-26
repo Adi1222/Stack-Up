@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 import Tag from '../../Tag'
 
 
-const QuestionInfo = ({id, title, author, created_at, tags, body}) => {
+const QuestionInfo = ({id, title, author, created_at, tags, children}) => {
     return(
         <div>
             <Link  className='' to={`questions/${id}`}>{title}</Link>
-            <div>{body}</div>
+            <div>{children}</div>
         
 
-          
+            <div>
+                    <Link to={`/users/${author}`} >
+                        <img alt='user-logo' className='userlogo'
+                        src={`https://secure.gravatar.com/avatar/${author}?s=164&d=identicon`}/>
+                    </Link>
+            </div>
 
 
             <div>

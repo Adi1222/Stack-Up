@@ -4,13 +4,17 @@ import { Redirect} from 'react-router-dom';
 import  PropTypes from 'prop-types';
 
 import LoginFormComponent from '../../components/AuthForm/LoginForm.component';
+import PageContainer from '../../components/PageContainer/PageContainer.component';
+import HomePage from '../Homepage/HomePage.component';
 
 
-
+const HomePageComp = PageContainer(HomePage);
 
 const Login = ({ isAuthenticated }) => {
   if (isAuthenticated === true) {
-    return <Redirect to="/" />;
+    return <Fragment>
+      <HomePageComp />
+    </Fragment>
   }
 
 

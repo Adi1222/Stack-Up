@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 
 const QuestionItem = ({ question: { id, title, body, tags, answers, comments, created_at, views, author } }) => {
 
-    return (
+
+    return(
+        <h1>Hi</h1>
+    )
+    /*return (
         <div>
             <div>
                 <div>
@@ -49,7 +53,7 @@ const QuestionItem = ({ question: { id, title, body, tags, answers, comments, cr
 
 
         </div>
-    )
+    )*/
 
 }
 

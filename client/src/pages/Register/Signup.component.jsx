@@ -2,16 +2,19 @@ import React, { Fragment , useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link} from 'react-router-dom';
 import  PropTypes from 'prop-types';
-import { register } from '../../redux/actions/auth/auth';
 
 
 import SignupFormComponent from '../../components/AuthForm/SignupForm.component';
+import PageContainer from '../../components/PageContainer/PageContainer.component';
+import HomePage from '../Homepage/HomePage.component';
 
-
+const HomePageComp = PageContainer(HomePage);
 
 const Signup = ({ isAuthenticated }) => {
   if (isAuthenticated === true) {
-    return <Redirect to="/" />;
+    return <Fragment>
+    <HomePageComp />
+  </Fragment>
   }
 
 

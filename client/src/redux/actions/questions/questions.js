@@ -5,16 +5,19 @@ import * as questionTypes from './questions.types'
 
 
 // get questions
-export const getQuestions = () => async dispatch => {
+export const getPosts = () => async dispatch => {
 
     try{
 
         const res = await axios.get('http://localhost:5000/api/questions');
+        console.log(res.data);
 
         dispatch({
-            type: questionTypes.GET_QUESTIONS,
-            payload: res.data
+            type: questionTypes.GET_POSTS,
+            payload: res.data.data
         });
+
+        //return "success";
 
 
     } catch(err) {
@@ -28,13 +31,13 @@ export const getQuestions = () => async dispatch => {
 
 
 // get a single question
-export const getQuestion = id => async dispatch => {
+export const getPost = id => async dispatch => {
     try{
 
         const res = await axios.get(`http://localhost:5000/api/questions/${id}`); // Remaining
 
         dispatch({
-            type: questionTypes.GET_QUESTION,
+            type: questionTypes.GET_POSTS,
             payload: res.data
         })
 

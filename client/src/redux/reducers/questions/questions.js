@@ -1,8 +1,8 @@
 import * as questionTypes from '../../actions/questions/questions.types';
 
 const initialState = {
-    questions: [],
-    question: null,
+    posts: [],
+    post: null,
     loading: false,
     error: null
 };
@@ -10,10 +10,18 @@ const initialState = {
 const questionReducer = (state = initialState, action) => {
 
     switch(action.type) {
+        case questionTypes.GET_POSTS:
+            return{
+                ...state,
+                posts: action.payload,
+                loading: false,
+
+            };
+
         case questionTypes.ADD_QUESTION:
             return {
                 ...state,
-                questions: [action.payload, ...state.questions],
+                posts: [action.payload, ...state.questions],
                 loading: false
             };
 
@@ -21,22 +29,15 @@ const questionReducer = (state = initialState, action) => {
             return {
                 ...state,
                 // remove the deleted tquestion from the state questions array
-                questions: state.questions.filter(ques => ques.id !== action.payload),
+                posts: state.posts.filter(ques => ques.id !== action.payload),
                 loading: false
             };
 
-        case questionTypes.GET_QUESTIONS:
-            return {
-                ...state,
-                questions: [action.payload],
-                loading: false,
-                error: null
-            };
         
-        case questionTypes.GET_QUESTION:
+        case questionTypes.GET_POST:
             return {
                 ...state,
-                question: action.payload,
+                post: action.payload,
                 loading: false
             };
 

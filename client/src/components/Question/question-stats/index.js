@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QuestionStats = ({ question: { id, title, body, tags, answers, comments, created_at, views, author } }) => {
+const QuestionStats = ({views}) => {
     return(
         <div className='container'>
             <div className=''>
